@@ -12,7 +12,7 @@ void mainLoop(SendPort sendPort) async {
   _loopWatch.start();
   Stopwatch _timerWatch = Stopwatch();
   _timerWatch.start();
-  // entities
+
   while (_running) {
     if (_loopWatch.elapsedMilliseconds > _updateTime) {
       _updates++;
