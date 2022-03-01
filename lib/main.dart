@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_game/game_core/game.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,9 +13,7 @@ void main() {
     ]);
     runApp(const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Center(
-        child: Text("Game"),
-      ),
+      home: Game(),
     ));
   });
 }
