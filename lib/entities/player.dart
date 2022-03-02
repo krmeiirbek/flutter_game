@@ -14,7 +14,7 @@ class Player extends Entity {
   double _degree = 0;
   bool isMoveLeft = false;
   bool isMoveRight = false;
-  double _speed = 3;
+  final double _speed = 3;
   bool isAcceleration = false;
 
   get getAngle => _angle;
@@ -27,7 +27,7 @@ class Player extends Entity {
       child: visible
           ? Transform.rotate(
               angle: _angle,
-              child: sprites.first,
+              child: sprites[currentSprite],
             )
           : const SizedBox(),
     );
@@ -49,8 +49,4 @@ class Player extends Entity {
     isMoveRight = false;
   }
 
-  @override
-  void update() {
-    move();
-  }
 }

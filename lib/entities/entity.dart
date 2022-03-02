@@ -6,6 +6,8 @@ abstract class Entity {
   final String spriteName;
   bool visible = true;
   List sprites = [];
+  int currentSprite = 0;
+  int currentTick = 0;
 
   Entity(this.spriteName) {
     for (var i = 0; i < 4; i++) {
@@ -13,7 +15,21 @@ abstract class Entity {
     }
   }
 
-  void update();
+  void _animate() {
+    currentTick++;
+    if (currentTick > 15) {
+      currentSprite++;
+      currentTick = 0;
+    }
+    if(currentSprite > 3){
+      currentSprite = 0;
+    }
+  }
+
+  void update() {
+    _animate();
+    move();
+  }
 
   void move();
 
