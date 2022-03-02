@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_game/game_core/game.dart';
+import 'package:flutter_game/utility/global_vars.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +23,19 @@ void main() {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void didChangeDependencies() {
+    initGame(context);
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,5 +47,10 @@ class MyApp extends StatelessWidget {
         ),
         child: const Game(),
     );
+  }
+
+  void initGame(BuildContext context) {
+    GlobalVars.screenWidth = MediaQuery.of(context).size.width;
+    GlobalVars.screenHeight = MediaQuery.of(context).size.height;
   }
 }

@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_game/entities/entity.dart';
+import 'package:flutter_game/utility/global_vars.dart';
 
 class Player extends Entity {
   Player() : super("player") {
@@ -7,21 +10,39 @@ class Player extends Entity {
     y = 150;
   }
 
+  double _angle = 0;
+  double _degree = 0;
+  bool isMoveLeft = false;
+  bool isMoveRight = false;
+  double _speed = 3;
+
   @override
   Widget build() {
     return Positioned(
       top: y,
       left: x,
-      child: visible ? sprites.first : const SizedBox(),
+      child: visible
+          ? Transform.rotate(
+              angle: _angle,
+              child: sprites.first,
+            )
+          : const SizedBox(),
     );
   }
 
   @override
   void move() {
-    x++;
-    if (x > 500) {
-      x = 50;
-    }
+    if (isMoveLeft) _degree -= 5;
+    if (isMoveRight) _degree += 5;
+    _angle = (_degree * pi) / 180;
+    x += sin(_angle) * _speed;
+    y -= cos(_angle) * _speed;
+    if (x < 0) x = 0;
+    if (x > GlobalVars.screenWidth - 50) x = GlobalVars.screenWidth - 50;
+    if (y < 0) y = 0;
+    if (y > GlobalVars.screenHeight - 50) y = GlobalVars.screenHeight - 50;
+    isMoveLeft = false;
+    isMoveRight = false;
   }
 
   @override
